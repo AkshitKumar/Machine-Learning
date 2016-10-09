@@ -30,9 +30,7 @@ mu = mean(X)
 sigma = std(X)
 
 X_norm = X_norm - repmat(mu,length(X_norm),1);
-sigmaMatrix = repmat(sigma,length(X_norm),1);
-
-X_norm = X_norm ./ sigmaMatrix;
+sigmaMatrix = repmat(sigma,length(X_
 
 
 

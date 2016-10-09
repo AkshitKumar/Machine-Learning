@@ -16,9 +16,14 @@ function plotData(x, y)
 
 figure; % open a new figure window
 
+data = load('ex1data1.txt'); % Loading the data into a variable
+X = data(:,1); % Select the first column of data set into X
+y = data(:,2); % Select the second column of data set into y
+m = length(y);
 
-
-
+plot(X,y,'rx','MarkerSize',10);
+ylabel('Profit in $10,000s');
+xlabel('Population in City in $10000s');
 
 
 % ============================================================
