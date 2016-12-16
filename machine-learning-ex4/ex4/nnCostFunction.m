@@ -62,24 +62,35 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Forward Propogation 
+a1 = [ones(m,1) X]; % add the bias term
+z2 = a1*Theta1'; 
+a2 = [ones(size(z2,1),1) sigmoid(z2)]; % add the bias term
+z3 = a2 * Theta2';
+a3 = sigmoid(z3); % no bias added because this is the last layer
+p = eye(num_labels);
+Y = p(y,:);
+J = -(sum(sum(Y.*log(a3) + (1-Y).*log(1-a3))));
+J = J/m;
 
+% Add the regularization term
+reg = (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
+J = J + reg;
 
+% Back Propogation
+d3 = a3 - Y;
+d2 = (d3 * Theta2).*[ones(size(z2,1),1) sigmoidGradient(z2)];
 
+D1 = d2(:,2:end)' * a1;
+D2 = d3' * a2;
 
+% Ignoring the regularization term
+Theta1_grad = Theta1_grad + D1/m;
+Theta2_grad = Theta2_grad + D2/m;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+% Add the regularization term
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + (lambda/m)*(Theta1(:,2:end));
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + (lambda/m)*(Theta2(:,2:end));
 % -------------------------------------------------------------
 
 % =========================================================================
