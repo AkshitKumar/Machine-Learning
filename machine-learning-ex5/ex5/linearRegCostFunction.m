@@ -20,8 +20,10 @@ grad = zeros(size(theta));
 %
 
 
-
-
+J = (sum(((X * theta) - y).^2))/(2*m) + lambda*sum(theta(2,:).^2)/(2*m);
+A = eye(size(theta,1));
+A(1,1) = 0;
+grad = (((X * theta) - y)' * X)/m + ((lambda/m) * theta' * A);
 
 
 
