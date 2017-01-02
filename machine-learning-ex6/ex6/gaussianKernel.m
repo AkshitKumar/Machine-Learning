@@ -16,6 +16,9 @@ sim = 0;
 %
 %
 
+x = x1 - x2;
+normx = x'*x;
+sim = exp(-1*normx/(2*sigma^2));
 
 
 

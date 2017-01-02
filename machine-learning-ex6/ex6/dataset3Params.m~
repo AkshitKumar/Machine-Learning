@@ -31,14 +31,7 @@ for i = 1:8
         sigma_temp = vals(j);
         model = svmTrain(X,y,C_temp,@(x1,x2) gaussianKernel(x1,x2,sigma_temp));
         predictions = svmPredict(model,Xval);
-        error = mean(double(predictions ~= yval));
-        if error < min_error
-            C = C_temp;
-            sigma = sigma_temp;
-            min_error = error;
-        end
-    end
-end
+        error = mean(doubl
 
 
 
